@@ -22,7 +22,7 @@ if __name__ == "__main__":
     conf.set("spark.python.worker.memory", "4g")
     
     sc = SparkContext(conf=conf)
-    raw_data = sc.textFile("/home/abhishek/Apache_Spark/exercise/News_Popularity/OnlineNewsPopularity/OnlineNewsPopularity.csv", minPartitions=100)
+    raw_data = sc.textFile("OnlineNewsPopularity.csv", minPartitions=100)
     
     raw_data_split = raw_data.map(lambda line: [val.strip() for val in line.split(',')])
     
@@ -48,5 +48,5 @@ if __name__ == "__main__":
     print(model.toDebugString())
     
     # Save and load model
-    model.save(sc, "/home/abhishek/Apache_Spark/exercise/News_Popularity/OnlineNewsPopularity/myModelPath")
+    model.save(sc, "myModelPath")
     sameModel = DecisionTreeModel.load(sc, "myModelPath")
